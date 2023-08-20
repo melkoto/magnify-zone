@@ -18,7 +18,7 @@ module.exports = {
         'prettier/prettier': 'error',
         'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error',
-        'react/react-in-jsx-scope': 'off',
+        'react/prop-types': 'off',
         'import/prefer-default-export': 'off',
     },
     plugins: ['prettier', 'react'],
