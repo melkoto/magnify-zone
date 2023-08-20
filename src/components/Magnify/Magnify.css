@@ -25,10 +25,10 @@
     height: 200px;
     border: 2px solid #333;
     background-repeat: no-repeat;
-    display: none;
+    pointer-events: none; /* Ensure that the zoom div doesn't interfere with mouse events */
+    transform-origin: top left; /* Set the origin for scaling */
 }
 
-/* Media query for smaller screens */
 @media (max-width: 768px) {
     .magnify-container {
         height: auto;
@@ -47,3 +47,4 @@
         height: 150px;
     }
 }
+

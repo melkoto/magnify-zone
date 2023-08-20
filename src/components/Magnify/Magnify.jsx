@@ -34,10 +34,11 @@ export const Magnify = ({ imageUrl, zoomFactor }) => {
                         className="magnify-zoom"
                         style={{
                             backgroundImage: `url(${imageUrl})`,
-                            backgroundPosition: `-${x * zoomFactor}px -${
-                                y * zoomFactor
-                            }px`,
+                            // prettier-ignore
+                            backgroundPosition: `-${x * zoomFactor}px -${y * zoomFactor}px`,
                             transform: `scale(${1 / zoomFactor})`,
+                            left: `${x}`,
+                            top: `${y}`,
                         }}
                     ></div>
                 )}
