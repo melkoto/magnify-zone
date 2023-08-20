@@ -1,0 +1,49 @@
+.magnify-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.magnify-image-container {
+    position: relative;
+    overflow: hidden;
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+}
+
+.magnify-image-container img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.magnify-zoom {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 2px solid #333;
+    background-repeat: no-repeat;
+    display: none;
+}
+
+/* Media query for smaller screens */
+@media (max-width: 768px) {
+    .magnify-container {
+        height: auto;
+    }
+
+    .magnify-image-container {
+        cursor: auto;
+    }
+
+    .magnify-image-container:hover .magnify-zoom {
+        display: block;
+    }
+
+    .magnify-zoom {
+        width: 150px;
+        height: 150px;
+    }
+}
