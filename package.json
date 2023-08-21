@@ -1,6 +1,6 @@
 {
   "name": "magnify-zone",
-  "version": "1.2.6",
+  "version": "1.3.0",
   "description": "React app to zoom in on a specific area of an image",
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",
@@ -11,7 +11,28 @@
     "type": "git",
     "url": "git+https://github.com/melkoto/magnify-zone.git"
   },
-  "keywords": [],
+  "keywords": [
+    "react",
+    "zoom",
+    "magnify",
+    "image zoom",
+    "hover zoom",
+    "image magnify",
+    "react component",
+    "zoom effect",
+    "image effect",
+    "ui component",
+    "image hover effect",
+    "photo zoom",
+    "picture magnify",
+    "detail view",
+    "hover detail",
+    "focus zoom",
+    "react zoom image",
+    "react magnify image",
+    "react image effect",
+    "react library"
+  ],
   "author": "Movsar Makhmutov",
   "license": "ISC",
   "bugs": {
