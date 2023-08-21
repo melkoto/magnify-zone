@@ -1,17 +1,22 @@
 # Magnify zone
 
-Library to zoom in image on hover
+Library to zoom in image on hover.   
+Image location: `publuc/img/img.png`
+
+Props:
+- `imageUrl: string` - url from public folder
+- `zoomFactor: number` - positive number
+- `zoomPosition: string` - `over`, `left`, `right`, `top`, `bottom`. Default: `over`
+
 
 ## Usage
 ```JS
 import { Magnify } from 'maginify-zone'
 
-import img from './img.png'
-
 const Compenent = () => {
     return (
         <>
-            <Magnify imageUrl={img} zoomFactor={2} />
+            <Magnify imageUrl='/img/image.png' zoomFactor={2} />
         </>
     )
 }

@@ -1,32 +1,18 @@
 .magnify-container {
     position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
 }
 
 .magnify-image-container {
     position: relative;
-    overflow: hidden;
-    cursor: zoom-in;
-    transition: transform 0.3s ease;
-}
-
-.magnify-image-container img {
-    display: block;
-    max-width: 100%;
-    height: auto;
+    display: inline-block;
 }
 
 .magnify-zoom {
     position: absolute;
     width: 200px;
     height: 200px;
-    border: 2px solid #333;
-    background-repeat: no-repeat;
-    pointer-events: none; /* Ensure that the zoom div doesn't interfere with mouse events */
-    transform-origin: top left; /* Set the origin for scaling */
+    overflow: hidden;
+    border: 1px solid #aaa;
 }
 
 @media (max-width: 768px) {
@@ -47,4 +33,3 @@
         height: 150px;
     }
 }
-
