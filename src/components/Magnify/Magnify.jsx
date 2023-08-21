@@ -84,7 +84,7 @@ export const Magnify = ({ imageUrl, zoomFactor, zoomPosition = 'over' }) => {
                     alt="Image"
                     style={{ width: '100%', height: '100%' }}
                 />
-                {isVisible && zoomFactor > 0 && (
+                {isVisible && zoomFactor > 1 && (
                     <div
                         className="magnify-zoom"
                         style={{
