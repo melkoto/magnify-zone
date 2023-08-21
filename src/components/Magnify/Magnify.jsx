@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import './Magnify.css'
 
-export const Magnify = ({ imageUrl, zoomFactor, zoomPosition = 'over' }) => {
+export const Magnify = ({
+    imageUrl,
+    zoomFactor = 1,
+    zoomPosition = 'over',
+}) => {
     const [position, setPosition] = useState({ x: 0, y: 0 })
     const [isVisible, setIsVisible] = useState(false)
 
