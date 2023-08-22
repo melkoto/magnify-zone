@@ -20,6 +20,7 @@ module.exports = {
         'react/jsx-uses-vars': 'error',
         'react/prop-types': 'off',
         'import/prefer-default-export': 'off',
+        'no-use-before-define': 'off',
     },
     plugins: ['prettier', 'react'],
 }

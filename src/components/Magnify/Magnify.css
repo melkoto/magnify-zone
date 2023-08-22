@@ -1,5 +1,7 @@
 .magnify-container {
     position: relative;
+    width: 200px;
+    height: 200px;
 }
 
 .magnify-image-container {
@@ -7,12 +9,16 @@
     display: inline-block;
 }
 
+.magnify-image-container img {
+    width: 100%;
+    height: 100%;
+}
+
 .magnify-zoom {
     position: absolute;
     width: 200px;
     height: 200px;
     overflow: hidden;
-    border: 1px solid #aaa;
 }
 
 @media (max-width: 768px) {

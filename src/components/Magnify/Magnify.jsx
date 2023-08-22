@@ -67,27 +67,21 @@ export const Magnify = ({
                     left: '0',
                     transform: `translateY(-${margin}px)`,
                 }
-            default: // over
+            default:
                 return { left: '0', top: '0', position: 'absolute' }
         }
     }
 
     return (
-        <div
-            className="magnify-container"
-            style={{ width: '200px', height: '200px' }}
-        >
+        <div className="magnify-container">
             <div
                 className="magnify-image-container"
                 onMouseMove={handleMouseMove}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             >
-                <img
-                    src={imageUrl}
-                    alt="Image"
-                    style={{ width: '100%', height: '100%' }}
-                />
+                <img src={imageUrl} alt="Image" />
+
                 {isVisible && zoomFactor > 1 && (
                     <div
                         className="magnify-zoom"
