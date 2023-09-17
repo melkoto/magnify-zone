@@ -84,14 +84,13 @@ export const Magnify: React.FC<MagnifyProps> = ({
 
     const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
         const relatedTarget = e.relatedTarget as HTMLElement
-        if (relatedTarget && e.currentTarget.contains(relatedTarget)) {
+        if (
+            relatedTarget instanceof Node &&
+            e.currentTarget.contains(relatedTarget)
+        ) {
             return
         }
 
-        setIsVisible(false)
-    }
-
-    const handleZoomLeave = () => {
         setIsVisible(false)
     }
 
@@ -99,27 +98,23 @@ export const Magnify: React.FC<MagnifyProps> = ({
         switch (zoomPosition) {
             case 'left':
                 return {
-                    right: '100%',
+                    right: `calc(100% + ${marginSize})`,
                     top: '0',
-                    marginLeft: `-${marginSize}`,
                 }
             case 'right':
                 return {
-                    left: '100%',
+                    left: `calc(100% + ${marginSize})`,
                     top: '0',
-                    marginRight: `-${marginSize}`,
                 }
             case 'top':
                 return {
-                    bottom: '100%',
+                    bottom: `calc(100% + ${marginSize})`,
                     left: '0',
-                    marginBottom: `-${marginSize}`,
                 }
             case 'bottom':
                 return {
-                    top: '100%',
+                    top: `calc(100% + ${marginSize})`,
                     left: '0',
-                    marginTop: `-${marginSize}`,
                 }
             default:
                 return {
