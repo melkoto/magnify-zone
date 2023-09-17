@@ -7,6 +7,8 @@ interface MagnifyProps {
     zoomPosition?: 'over' | 'left' | 'right' | 'top' | 'bottom'
     zoomWidth?: number
     zoomHeight?: number
+    marginSize?: string
+    mainImageWidth?: string
 }
 
 interface Position {
@@ -20,6 +22,8 @@ export const Magnify: React.FC<MagnifyProps> = ({
     zoomPosition = 'over',
     zoomWidth = 200,
     zoomHeight = 200,
+    marginSize = '5px',
+    mainImageWidth = '300px',
 }) => {
     const [position, setPosition] = useState<Position>({ x: 0, y: 0 })
     const [isVisible, setIsVisible] = useState<boolean>(false)
@@ -36,11 +40,26 @@ export const Magnify: React.FC<MagnifyProps> = ({
     }, [zoomWidth, zoomHeight, zoomFactor])
 
     const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-        const containerWidth = event.currentTarget.offsetWidth
-        const containerHeight = event.currentTarget.offsetHeight
+        const imageElement = event.currentTarget.querySelector('img')
+        if (!imageElement) return
 
-        const percentageX = event.nativeEvent.offsetX / containerWidth
-        const percentageY = event.nativeEvent.offsetY / containerHeight
+        const imageRect = imageElement.getBoundingClientRect()
+
+        if (
+            event.clientX < imageRect.left ||
+            event.clientX > imageRect.right ||
+            event.clientY < imageRect.top ||
+            event.clientY > imageRect.bottom
+        ) {
+            setIsVisible(false)
+            return
+        }
+
+        const containerWidth = imageElement.offsetWidth
+        const containerHeight = imageElement.offsetHeight
+
+        const percentageX = (event.clientX - imageRect.left) / containerWidth
+        const percentageY = (event.clientY - imageRect.top) / containerHeight
 
         const xOnZoomedImage = zoomedImageWidth * percentageX
         const yOnZoomedImage = zoomedImageHeight * percentageY
@@ -63,7 +82,16 @@ export const Magnify: React.FC<MagnifyProps> = ({
         setIsVisible(true)
     }
 
-    const handleMouseLeave = () => {
+    const handleMouseLeave = (e: React.MouseEvent<HTMLDivElement>) => {
+        const relatedTarget = e.relatedTarget as HTMLElement
+        if (relatedTarget && e.currentTarget.contains(relatedTarget)) {
+            return
+        }
+
+        setIsVisible(false)
+    }
+
+    const handleZoomLeave = () => {
         setIsVisible(false)
     }
 
@@ -73,24 +101,32 @@ export const Magnify: React.FC<MagnifyProps> = ({
                 return {
                     right: '100%',
                     top: '0',
+                    marginLeft: `-${marginSize}`,
                 }
             case 'right':
                 return {
                     left: '100%',
                     top: '0',
+                    marginRight: `-${marginSize}`,
                 }
             case 'top':
                 return {
                     bottom: '100%',
                     left: '0',
+                    marginBottom: `-${marginSize}`,
                 }
             case 'bottom':
                 return {
                     top: '100%',
                     left: '0',
+                    marginTop: `-${marginSize}`,
                 }
             default:
-                return { left: '0', top: '0', position: 'absolute' }
+                return {
+                    left: '0',
+                    top: '0',
+                    position: 'absolute',
+                }
         }
     }
 
@@ -102,11 +138,16 @@ export const Magnify: React.FC<MagnifyProps> = ({
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
             >
-                <img src={imageUrl} alt="Image" />
+                <img
+                    src={imageUrl}
+                    alt="Image"
+                    style={{ width: mainImageWidth }}
+                />
 
-                {zoomFactor > 1 && (
+                {isVisible && zoomFactor > 1 && (
                     <div
                         className="magnify-zoom"
+                        onMouseLeave={handleZoomLeave}
                         style={{
                             ...getZoomPosition(),
                             backgroundImage: `url(${imageUrl})`,

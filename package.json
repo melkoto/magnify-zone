@@ -1,6 +1,6 @@
 {
   "name": "magnify-zone",
-  "version": "1.5.14",
+  "version": "1.5.23",
   "description": "React app to zoom in on a specific area of an image",
   "main": "./dist/index.js",
   "module": "./dist/index.es.js",

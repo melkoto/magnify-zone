@@ -7,6 +7,8 @@ declare module 'magnify-zone' {
         zoomPosition?: 'over' | 'left' | 'right' | 'top' | 'bottom'
         zoomWidth?: number
         zoomHeight?: number
+        marginSize?: string
+        mainImageWidth?: string
     }
 
     const Magnify: React.FC<MagnifyProps>
