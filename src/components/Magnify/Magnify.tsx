@@ -1,15 +1,26 @@
 import React, { useState } from 'react'
 import './Magnify.css'
 
-export const Magnify = ({
+interface MagnifyProps {
+    imageUrl: string
+    zoomFactor?: number
+    zoomPosition?: 'over' | 'left' | 'right' | 'top' | 'bottom'
+}
+
+interface Position {
+    x: number
+    y: number
+}
+
+export const Magnify: React.FC<MagnifyProps> = ({
     imageUrl,
     zoomFactor = 1,
     zoomPosition = 'over',
 }) => {
-    const [position, setPosition] = useState({ x: 0, y: 0 })
-    const [isVisible, setIsVisible] = useState(false)
+    const [position, setPosition] = useState<Position>({ x: 0, y: 0 })
+    const [isVisible, setIsVisible] = useState<boolean>(false)
 
-    const handleMouseMove = (event) => {
+    const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
         const zoomedImageWidth = event.currentTarget.offsetWidth * zoomFactor
         const zoomedImageHeight = event.currentTarget.offsetHeight * zoomFactor
 
@@ -39,33 +50,27 @@ export const Magnify = ({
         setIsVisible(false)
     }
 
-    const getZoomPosition = () => {
-        const margin = 10
-
+    const getZoomPosition = (): React.CSSProperties => {
         switch (zoomPosition) {
             case 'left':
                 return {
                     right: '100%',
                     top: '0',
-                    transform: `translateX(${margin}px)`,
                 }
             case 'right':
                 return {
                     left: '100%',
                     top: '0',
-                    transform: `translateX(-${margin}px)`,
                 }
             case 'top':
                 return {
                     bottom: '100%',
                     left: '0',
-                    transform: `translateY(${margin}px)`,
                 }
             case 'bottom':
                 return {
                     top: '100%',
                     left: '0',
-                    transform: `translateY(-${margin}px)`,
                 }
             default:
                 return { left: '0', top: '0', position: 'absolute' }

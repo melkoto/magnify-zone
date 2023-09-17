@@ -8,11 +8,15 @@ module.exports = {
         'prettier',
         'eslint:recommended',
         'plugin:react/recommended',
+        'plugin:@typescript-eslint/recommended',
     ],
-    overrides: [],
+    parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
+        ecmaFeatures: {
+            jsx: true,
+        },
     },
     rules: {
         'prettier/prettier': 'error',
@@ -22,6 +26,17 @@ module.exports = {
         'import/prefer-default-export': 'off',
         'no-use-before-define': 'off',
         'import/no-extraneous-dependencies': 'off',
+        '@typescript-eslint/no-use-before-define': ['error'],
     },
-    plugins: ['prettier', 'react'],
+    plugins: ['prettier', 'react', '@typescript-eslint'],
+    settings: {
+        react: {
+            version: 'detect',
+        },
+        'import/resolver': {
+            node: {
+                extensions: ['.js', '.jsx', '.ts', '.tsx'],
+            },
+        },
+    },
 }
