@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import './Magnify.css'
 
 interface MagnifyProps {
@@ -23,26 +23,39 @@ export const Magnify: React.FC<MagnifyProps> = ({
 }) => {
     const [position, setPosition] = useState<Position>({ x: 0, y: 0 })
     const [isVisible, setIsVisible] = useState<boolean>(false)
+    const [zoomedImageWidth, setZoomedImageWidth] = useState<number>(
+        zoomWidth * zoomFactor
+    )
+    const [zoomedImageHeight, setZoomedImageHeight] = useState<number>(
+        zoomHeight * zoomFactor
+    )
+
+    useEffect(() => {
+        setZoomedImageWidth(zoomWidth * zoomFactor)
+        setZoomedImageHeight(zoomHeight * zoomFactor)
+    }, [zoomWidth, zoomHeight, zoomFactor])
 
     const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
-        const zoomedImageWidth = event.currentTarget.offsetWidth * zoomFactor
-        const zoomedImageHeight = event.currentTarget.offsetHeight * zoomFactor
+        const containerWidth = event.currentTarget.offsetWidth
+        const containerHeight = event.currentTarget.offsetHeight
 
-        const xOnZoomedImage = event.nativeEvent.offsetX * zoomFactor
-        const yOnZoomedImage = event.nativeEvent.offsetY * zoomFactor
+        const percentageX = event.nativeEvent.offsetX / containerWidth
+        const percentageY = event.nativeEvent.offsetY / containerHeight
 
-        const xOffset = xOnZoomedImage - event.currentTarget.offsetWidth / 2
-        const yOffset = yOnZoomedImage - event.currentTarget.offsetHeight / 2
+        const xOnZoomedImage = zoomedImageWidth * percentageX
+        const yOnZoomedImage = zoomedImageHeight * percentageY
+
+        const xOffset = xOnZoomedImage - zoomWidth / 2
+        const yOffset = yOnZoomedImage - zoomHeight / 2
+
+        const minXOffset = 0
+        const minYOffset = 0
+        const maxXOffset = zoomedImageWidth - zoomWidth
+        const maxYOffset = zoomedImageHeight - zoomHeight
 
         setPosition({
-            x: -Math.min(
-                Math.max(0, xOffset),
-                zoomedImageWidth - event.currentTarget.offsetWidth
-            ),
-            y: -Math.min(
-                Math.max(0, yOffset),
-                zoomedImageHeight - event.currentTarget.offsetHeight
-            ),
+            x: -Math.min(Math.max(xOffset, minXOffset), maxXOffset),
+            y: -Math.min(Math.max(yOffset, minYOffset), maxYOffset),
         })
     }
 
@@ -98,8 +111,10 @@ export const Magnify: React.FC<MagnifyProps> = ({
                             ...getZoomPosition(),
                             backgroundImage: `url(${imageUrl})`,
                             backgroundPosition: `${position.x}px ${position.y}px`,
-                            backgroundSize: `${zoomFactor * 100}%`,
+                            backgroundSize: `${zoomedImageWidth}px ${zoomedImageHeight}px`,
                             opacity: isVisible ? 1 : 0,
+                            height: `${zoomHeight}px`,
+                            width: `${zoomWidth}px`,
                         }}
                     ></div>
                 )}
