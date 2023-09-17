@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import './Magnify.css'
 
-interface MagnifyProps {
+interface MagnifyProps extends React.HTMLProps<HTMLDivElement> {
     imageUrl: string
     zoomFactor?: number
     zoomPosition?: 'over' | 'left' | 'right' | 'top' | 'bottom'
@@ -142,7 +142,6 @@ export const Magnify: React.FC<MagnifyProps> = ({
                 {isVisible && zoomFactor > 1 && (
                     <div
                         className="magnify-zoom"
-                        onMouseLeave={handleZoomLeave}
                         style={{
                             ...getZoomPosition(),
                             backgroundImage: `url(${imageUrl})`,
