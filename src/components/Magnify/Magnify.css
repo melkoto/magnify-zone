@@ -16,9 +16,9 @@
 
 .magnify-zoom {
     position: absolute;
-    width: 200px;
-    height: 200px;
     overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
 }
 
 @media (max-width: 768px) {

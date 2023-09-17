@@ -5,6 +5,8 @@ interface MagnifyProps {
     imageUrl: string
     zoomFactor?: number
     zoomPosition?: 'over' | 'left' | 'right' | 'top' | 'bottom'
+    zoomWidth?: number
+    zoomHeight?: number
 }
 
 interface Position {
@@ -16,6 +18,8 @@ export const Magnify: React.FC<MagnifyProps> = ({
     imageUrl,
     zoomFactor = 1,
     zoomPosition = 'over',
+    zoomWidth = 200,
+    zoomHeight = 200,
 }) => {
     const [position, setPosition] = useState<Position>({ x: 0, y: 0 })
     const [isVisible, setIsVisible] = useState<boolean>(false)
@@ -87,7 +91,7 @@ export const Magnify: React.FC<MagnifyProps> = ({
             >
                 <img src={imageUrl} alt="Image" />
 
-                {isVisible && zoomFactor > 1 && (
+                {zoomFactor > 1 && (
                     <div
                         className="magnify-zoom"
                         style={{
@@ -95,6 +99,7 @@ export const Magnify: React.FC<MagnifyProps> = ({
                             backgroundImage: `url(${imageUrl})`,
                             backgroundPosition: `${position.x}px ${position.y}px`,
                             backgroundSize: `${zoomFactor * 100}%`,
+                            opacity: isVisible ? 1 : 0,
                         }}
                     ></div>
                 )}
