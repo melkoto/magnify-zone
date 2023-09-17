@@ -21,6 +21,7 @@ module.exports = {
         'react/prop-types': 'off',
         'import/prefer-default-export': 'off',
         'no-use-before-define': 'off',
+        'import/no-extraneous-dependencies': 'off',
     },
     plugins: ['prettier', 'react'],
 }

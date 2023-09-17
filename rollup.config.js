@@ -2,8 +2,8 @@ import babel from 'rollup-plugin-babel'
 import nodeResolve from '@rollup/plugin-node-resolve'
 import peerDeps from 'rollup-plugin-peer-deps-external'
 import postcss from 'rollup-plugin-postcss'
-
 import { terser } from 'rollup-plugin-terser'
+import image from 'rollup-plugin-image'
 
 export default [
     {
@@ -31,6 +31,7 @@ export default [
                 minimize: true,
             }),
             terser(),
+            image(),
         ],
     },
 ]
