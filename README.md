@@ -5,9 +5,11 @@ The Magnify component provides a zoom-in feature for images, similar to a magnif
 ## Props
 Here are the props that you can provide to the Magnify component:
 
-- `imageUrl` **(required)**: The source URL of the image that you want to magnify.
-- `zoomFactor`: A multiplier to determine how much the image should be zoomed. **Default is 1**, which means no zoom.
-- `zoomPosition`: Determines where the zoomed-in image should be positioned relative to the main image. Possible 
+- `imageUrl: string` **(required)**: The source URL of the image that you want to magnify.
+- `zoomFactor: number`: A multiplier to determine how much the image should be zoomed. **Default is 1**, which means no 
+  zoom.
+- `zoomPosition: string`: Determines where the zoomed-in image should be positioned relative to the main image. 
+  Possible 
   values are:
   - `over` **(default)**: Over the main image.
   - `left`: To the left of the main image.
@@ -15,11 +17,19 @@ Here are the props that you can provide to the Magnify component:
   - `top`: Above the main image.
   - `bottom`: Below the main image.
 
-- `zoomWidth`: Width of the zoomed-in image in pixels. **Default is 200**.
-- `zoomHeight`: Height of the zoomed-in image in pixels. **Default is 200**.
-- `marginSize`: Space between the main image and the zoomed-in image, if positioned to the left, right, top, or bottom. 
+- `zoomWidth: number`: Width of the zoomed-in image in pixels. **Default is 200**.
+- `zoomHeight: number`: Height of the zoomed-in image in pixels. **Default is 200**.
+- `marginSize: string`: Space between the main image and the zoomed-in image, if positioned to the `left`, `right`, `top`, or 
+  `bottom`. 
   **Default is 5px**.
-- `mainImageWidth`: Width of the main image. **Default is 300px**.
+- `mainImageWidth: string`: Width of the main image. **Default is 300px**.
+
+### Notes on Props
+
+- Properties `zoomWidth` and `zoomHeight` expect numbers which will be interpreted as pixels.
+- The `marginSize` and `mainImageWidth` properties expect a string, typically representing the size in pixels (e.g., 
+  "10px").
+
 
 ## Usage
 ### When image in `public` folder:
