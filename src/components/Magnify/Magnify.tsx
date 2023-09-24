@@ -147,9 +147,9 @@ export const Magnify: React.FC<MagnifyProps> = ({
                             backgroundImage: `url(${imageUrl})`,
                             backgroundPosition: `${position.x}px ${position.y}px`,
                             backgroundSize: `${zoomedImageWidth}px ${zoomedImageHeight}px`,
-                            opacity: isVisible ? 1 : 0,
                             height: `${zoomHeight}px`,
                             width: `${zoomWidth}px`,
+                            opacity: isVisible ? 1 : 0,
                         }}
                     ></div>
                 )}
