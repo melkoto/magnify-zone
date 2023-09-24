@@ -132,6 +132,11 @@ export const Magnify: React.FC<MagnifyProps> = ({
                 onMouseMove={handleMouseMove}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
+                style={
+                    zoomPosition === 'over'
+                        ? { overflow: 'hidden' }
+                        : { overflow: 'visible' }
+                }
             >
                 <img
                     src={imageUrl}
@@ -149,7 +154,7 @@ export const Magnify: React.FC<MagnifyProps> = ({
                             backgroundSize: `${zoomedImageWidth}px ${zoomedImageHeight}px`,
                             height: `${zoomHeight}px`,
                             width: `${zoomWidth}px`,
-                            opacity: isVisible ? 1 : 0,
+                            opacity: 1,
                         }}
                     ></div>
                 )}
